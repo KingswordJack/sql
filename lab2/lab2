@@ -1,0 +1,23 @@
+
+SELECT N, Код, Новинка, Назва, Ціна, Сторінки FROM book_shop;
+SELECT * FROM book_shop;
+SELECT Код, Назва, Новинка, Сторінки, Ціна, N FROM book_shop;
+SELECT * FROM book_shop LIMIT 10;
+SELECT DISTINCT Код FROM book_shop; 
+SELECT * FROM book_shop WHERE Новинка= 'Yes';
+SELECT * FROM book_shop WHERE Новинка= 'Yes' AND Ціна BETWEEN 20 AND 30;
+SELECT * FROM book_shop WHERE Новинка= 'Yes' AND Ціна  NOT BETWEEN 20 AND 30;
+SELECT * FROM `book_shop` WHERE Сторінки BETWEEN 300 AND 400 AND Ціна BETWEEN 20 and 30;
+SELECT * FROM `book_shop` WHERE Дата BETWEEN CAST('2000-01-01' AS DATE) AND CAST('2000-02-29' AS DATE) OR Дата BETWEEN CAST('2000-12-01' AS DATE) AND CAST('2000-12-31' AS DATE);
+
+
+SELECT * FROM `book_shop` WHERE Дата BETWEEN CAST('2000-01-01' AS DATE) AND CAST('2000-02-29' AS DATE) OR Дата BETWEEN CAST('2000-12-01' AS DATE) AND CAST('2000-12-31' AS DATE);
+SELECT * FROM `book_shop` WHERE Код IN(5110, 5141, 4985, 4241);
+SELECT * FROM `book_shop` WHERE YEAR(Дата) IN(1999,2001,2003,2005);
+SELECT * FROM `book_shop` WHERE Назва>='А' AND Назва<'Л';
+SELECT * FROM `book_shop` WHERE Назва LIKE 'АПП%' AND Дата LIKE '2000%' AND Ціна<20;
+SELECT * FROM `book_shop` WHERE Назва LIKE 'АПП%Е' AND Дата  BETWEEN CAST('2000-01-01' AS DATE) AND CAST('2000-06-30' AS DATE);
+SELECT * FROM `book_shop` WHERE Назва LIKE '%Microsoft%' AND Назва NOT LIKE '%Windows%';
+SELECT * FROM `book_shop` WHERE Назва RLIKE '[0-9]';
+SELECT * FROM `book_shop` WHERE Назва RLIKE '.*[0-9].*[0-9].*[0-9].*';
+SELECT * FROM `book_shop` WHERE Назва RLIKE '.*[0-9].*[0-9].*[0-9].*[0-9].*[0-9].*' AND Назва NOT RLIKE '.*[0-9].*[0-9].*[0-9].*[0-9].*[0-9].*[0-9].*';
