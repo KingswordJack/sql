@@ -1,0 +1,63 @@
+
+Вивести список книг з числом сторінок від 300 до 400, відсортованих в зворотному алфавітному порядку назв
+
+
+SELECT title, page FROM book_shop WHERE page BETWEEN 300 and 400 ORDER BY title DESC;                             desc спаданя 
+
+Вивести список книг з ціною від 20 до 40, відсортованих за спаданням дати
+
+SELECT title, price, date FROM book_shop WHERE price BETWEEN 20 AND 40 ORDER BY date DESC;
+
+8. Вивести список книг, відсортованих в алфавітному порядку назв і ціною по спадаючій
+
+SELECT * FROM book_shop WHERE ORDER BY title ASC, price ASC;
+
+ Вивести книги, у яких ціна однієї сторінки < 10 копійок.
+
+SELECT * FROM book_shop WHERE (page/price) <0.10;      уточнить так ли это 
+
+Вивести значення наступних колонок: число символів в назві, перші 20 символів назви великими літерами
+
+SELECT LENGTH(title) AS 'Число символів в назві', UPPER(LEFT(title, 20)) AS 'перші 20 символів назви великими' FROM book_shop;
+
+Вивести значення наступних колонок: перші 10 і останні 10 символів назви прописними буквами, розділені '...'
+
+SELECT LOWER(CONCAT(LEFT(title,10), '...', RIGHT(title,10))) AS `перші 10 і останні 10 символів назви прописними буквами, розділені '...'` FROM book_shop;
+
+Вивести значення наступних колонок: назва, дата, день, місяць, рік
+
+SELECT title AS 'Назва', date AS 'Дата', DAYNAME(date) AS 'День', MONTHNAME(date) AS 'Місяць', YEAR(date) AS 'Рік' FROM book_shop;
+
+Вивести значення наступних колонок: назва, дата, дата в форматі 'dd / mm / yyyy'
+
+SELECT title AS `Назва`, date AS `Дата`, DATE_FORMAT(date, '%d/%m/%Y') AS `дата в форматі 'dd / mm / yyyy'` FROM `book_shop`;
+
+ Вивести значення наступних колонок: код, ціна, ціна в грн., ціна в євро, ціна в руб.
+
+
+SELECT Code AS `Код`, price AS `Ціна`, price*27.90 AS `Ціна в грн`, price*0.82 AS `Ціна в євро`, price*74.16 AS `Ціна в руб` FROM `book_shop`;
+
+Вивести значення наступних колонок: код, ціна, ціна в грн. без копійок, ціна без копійок округлена
+
+SELECT Code AS `Код`, price AS `Ціна`, TRUNCATE(price*27.90, 0) AS `Ціна в грн без копійок`, ROUND(price*27.90, 0) AS `Ціна в грн округлена` FROM `book_shop`;     TRUNCATE(a,0) округление  ROUND округление в большую сторону
+
+Додати інформацію про нову книгу (всі колонки)
+
+INSERT INTO book_shop (`N`, `Code`, `New`, `title`, `price`, `publish`, `page`, `format`, `date`, `tirage`, `Topic`, `Category`)
+ VALUE (111, 1333, 'No', 'Harry Potter', 5.15, 'Bloomsbury', 223, NULL, '1997-06-26', 10000, 'Магічний світ', 'Фентезі');
+
+Додати інформацію про нову книгу (колонки обов'язкові для введення)
+
+INSERT INTO book_shop(N, Code, title, price, publish) VALUE(230, 1400, 'Harry Potter and the Sorcerer`s Stone', 3.1, 'Bloomsbury');
+
+Видалити книги, видані до 1990 року
+
+DELETE FROM `book_shop` WHERE YEAR(date)<1990;
+
+Проставити поточну дату для тих книг, у яких дата видання відсутня
+
+UPDATE `book_shop` SET `date`=CURRENT_DATE WHERE date IS NULL;
+
+Установити ознаку новинка для книг виданих після 2005 року
+
+UPDATE `book_shop` SET `New`='Yes' WHERE YEAR(date)>=2005;
